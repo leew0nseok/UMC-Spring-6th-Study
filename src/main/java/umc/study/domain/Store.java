@@ -1,8 +1,8 @@
 package umc.study.domain;
+
 import jakarta.persistence.*;
 import lombok.*;
 import umc.study.domain.common.BaseEntity;
-import umc.study.domain.mapping.BookHashtag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +12,22 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Hashtag extends BaseEntity {
+public class Store extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "hashtag_id", nullable = false)
     private Long id;
 
-    @Column(nullable = false)
-    private String hashtagContent;
+    private String name;
 
-    @OneToMany(mappedBy = "hashtag", cascade = CascadeType.ALL)
-    private List<BookHashtag> bookHashTagList = new ArrayList<>();
+    private String address;
+
+    private Float score;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    private Region region;
+
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    private List<Mission> missionList = new ArrayList<>();
 }
