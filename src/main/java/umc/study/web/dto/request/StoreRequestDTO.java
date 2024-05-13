@@ -1,11 +1,9 @@
-package umc.study.web.dto;
+package umc.study.web.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import umc.study.domain.Region;
-
-import java.util.List;
 
 public class StoreRequestDTO {
     @Getter

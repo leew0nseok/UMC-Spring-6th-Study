@@ -8,9 +8,9 @@ import umc.study.converter.ReviewConverter;
 import umc.study.domain.Review;
 import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.domain.Store;
-import umc.study.repository.ReviewRespository;
-import umc.study.repository.StoreRespository;
-import umc.study.web.dto.ReviewRequestDTO;
+import umc.study.repository.ReviewRepository;
+import umc.study.repository.StoreRepository;
+import umc.study.web.dto.request.ReviewRequestDTO;
 
 import java.util.Optional;
 
@@ -18,14 +18,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ReviewCommandServiceImpl implements ReviewCommandService {
 
-    private final ReviewRespository reviewRespository;
-    private final StoreRespository storeRespository;
+    private final ReviewRepository reviewRepository;
+    private final StoreRepository storeRepository;
 
     @Override
     @Transactional
     public Review joinReview(Long storeId, ReviewRequestDTO.JoinDto request) {
         // 음식점 조회
-        Optional<Store> storeOptional = storeRespository.findById(storeId);
+        Optional<Store> storeOptional = storeRepository.findById(storeId);
         if (storeOptional.isEmpty()) {
             throw new StoreCategoryHandler(ErrorStatus.STORE_NOT_FOUND);
         }
@@ -33,7 +33,7 @@ public class ReviewCommandServiceImpl implements ReviewCommandService {
 
         Review newReview = ReviewConverter.toReview(store, request);
 
-        return reviewRespository.save(newReview);
+        return reviewRepository.save(newReview);
     }
 
 

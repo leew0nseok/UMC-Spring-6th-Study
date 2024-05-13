@@ -2,7 +2,7 @@ package umc.study.service.ReviewService;
 
 import jakarta.transaction.Transactional;
 import umc.study.domain.Review;
-import umc.study.web.dto.ReviewRequestDTO;
+import umc.study.web.dto.request.ReviewRequestDTO;
 
 public interface ReviewCommandService {
     @Transactional

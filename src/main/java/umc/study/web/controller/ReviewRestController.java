@@ -7,8 +7,8 @@ import umc.study.apiPayload.ApiResponse;
 import umc.study.converter.ReviewConverter;
 import umc.study.domain.Review;
 import umc.study.service.ReviewService.ReviewCommandServiceImpl;
-import umc.study.web.dto.ReviewRequestDTO;
-import umc.study.web.dto.ReviewResponseDTO;
+import umc.study.web.dto.request.ReviewRequestDTO;
+import umc.study.web.dto.response.ReviewResponseDTO;
 
 @RestController
 @RequiredArgsConstructor

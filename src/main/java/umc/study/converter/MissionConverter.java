@@ -2,8 +2,8 @@ package umc.study.converter;
 
 import umc.study.domain.Mission;
 import umc.study.domain.Store;
-import umc.study.web.dto.MissionRequestDTO;
-import umc.study.web.dto.MissionResponseDTO;
+import umc.study.web.dto.request.MissionRequestDTO;
+import umc.study.web.dto.response.MissionResponseDTO;
 
 import java.time.LocalDateTime;
 

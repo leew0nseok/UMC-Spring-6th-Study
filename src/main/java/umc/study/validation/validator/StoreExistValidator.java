@@ -5,7 +5,7 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.study.apiPayload.code.status.ErrorStatus;
-import umc.study.repository.StoreRespository;
+import umc.study.repository.StoreRepository;
 import umc.study.validation.annotation.ExistStores;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StoreExistValidator implements ConstraintValidator<ExistStores, List<Long>> {
 
-    private final StoreRespository storeRespository;
+    private final StoreRepository storeRepository;
 
     @Override
     public void initialize(ExistStores constraintAnnotation) {
@@ -24,7 +24,7 @@ public class StoreExistValidator implements ConstraintValidator<ExistStores, Lis
     @Override
     public boolean isValid(List<Long> values, ConstraintValidatorContext context) {
         boolean isValid = values.stream()
-                .allMatch(value -> storeRespository.existsById(value));
+                .allMatch(value -> storeRepository.existsById(value));
 
         if (!isValid) {
             context.disableDefaultConstraintViolation();
