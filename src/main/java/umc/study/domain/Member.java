@@ -48,6 +48,9 @@ public class Member extends BaseEntity {
 
     private LocalDate inactiveDate;
 
+    @OneToMany(mappedBy = "member")
+    private List<Review> reviews;
+
     //    @Column(nullable = false, length = 50)
     private String email;
 

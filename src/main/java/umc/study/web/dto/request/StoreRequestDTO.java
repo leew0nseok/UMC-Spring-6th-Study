@@ -15,4 +15,7 @@ public class StoreRequestDTO {
         Region region;
 
     }
+
+    public class ReveiwDTO {
+    }
 }
