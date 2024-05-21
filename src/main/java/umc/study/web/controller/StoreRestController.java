@@ -13,6 +13,7 @@ import umc.study.apiPayload.ApiResponse;
 import umc.study.converter.ReviewConverter;
 import umc.study.domain.Review;
 import umc.study.service.StoreService.StoreQueryServiceImpl;
+import umc.study.validation.annotation.CheckPage;
 import umc.study.validation.annotation.ExistStores;
 import umc.study.web.dto.response.ReviewResponseDTO;
 import umc.study.web.dto.response.StoreResponseDTO;
@@ -34,10 +35,10 @@ public class StoreRestController {
     })
     @Parameters({
             @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!"),
-            @Parameter(name = "page", description = "페이지 번호, 0번이 1 페이지 입니다."),
+            @Parameter(name = "page", description = "페이지 번호, 1 이상이여야 합니다."),
     })
-    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewList(@ExistStores @PathVariable(name = "storeId") Long storeId, @RequestParam(name = "page") Integer page){
-        Page<Review> reviewPage = storeQueryService.getReviewList(storeId,page);
+    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewList(@ExistStores @PathVariable(name = "storeId") Long storeId, @CheckPage @RequestParam(name = "page") Integer page){
+        Page<Review> reviewPage = storeQueryService.getReviewList(storeId,page-1);
 
         ReviewResponseDTO.ReviewPreViewListDTO reviewPreViewListDTO = ReviewConverter.toReviewPreViewListDTO(reviewPage);
 
