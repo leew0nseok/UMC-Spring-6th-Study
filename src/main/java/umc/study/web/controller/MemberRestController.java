@@ -17,6 +17,7 @@ import umc.study.domain.Member;
 import umc.study.domain.Review;
 import umc.study.service.MemberService.MemberCommandServiceImpl;
 import umc.study.service.StoreService.StoreQueryServiceImpl;
+import umc.study.validation.annotation.CheckPage;
 import umc.study.validation.annotation.ExistMembers;
 import umc.study.web.dto.request.MemberRequestDTO;
 import umc.study.web.dto.response.MemberResponseDTO;
@@ -47,10 +48,10 @@ public class MemberRestController {
     })
     @Parameters({
             @Parameter(name = "memberId", description = "멤버의 아이디, path variable 입니다!"),
-            @Parameter(name = "page", description = "페이지 번호, 0번이 1 페이지 입니다."),
+            @Parameter(name = "page", description = "페이지 번호, 1 이상이여야 합니다."),
     })
-    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewList(@ExistMembers @PathVariable(name = "memberId") Long memberId, @RequestParam(name = "page") Integer page){
-        Page<Review> reviewPage = storeQueryService.getReviewList(memberId,page);
+    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewList(@ExistMembers @PathVariable(name = "memberId") Long memberId, @CheckPage @RequestParam(name = "page") Integer page){
+        Page<Review> reviewPage = storeQueryService.getReviewList(memberId,page-1);
 
         ReviewResponseDTO.ReviewPreViewListDTO reviewPreViewListDTO = ReviewConverter.toReviewPreViewListDTO(reviewPage);
 
